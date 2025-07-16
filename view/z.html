@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manipulation de chaînes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0078d7;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .row > div {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1.5rem;
+      white-space: pre-wrap;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🧠 Manipulation de chaînes en JavaScript</h2>
+
+    <label for="chaine">Chaîne de départ :</label>
+    <input type="text" id="chaine" placeholder="Ex : Bonjour, Michel !" />
+
+    <div class="row">
+      <div>
+        <label for="operation">Opération :</label>
+        <select id="operation">
+          <option value="upper">Majuscules</option>
+          <option value="lower">Minuscules</option>
+          <option value="trim">Supprimer les espaces</option>
+          <option value="reverse">Inverser</option>
+          <option value="split">Fractionner</option>
+          <option value="replace">Remplacer</option>
+          <option value="count">Compter une lettre</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="param1">Paramètre 1 (ex: séparateur, lettre, cible) :</label>
+        <input type="text" id="param1" placeholder="Ex : , ou a ou Michel" />
+      </div>
+
+      <div>
+        <label for="param2">Paramètre 2 (ex: remplacement) :</label>
+        <input type="text" id="param2" placeholder="Ex : Michel → Copilot" />
+      </div>
+    </div>
+
+    <button onclick="executer()">Exécuter</button>
+
+    <pre id="resultat">Résultat : </pre>
+  </div>
+
+  <script>
+    function inverser(str) {
+      return str.split('').reverse().join('');
+    }
+
+    function compterOccurrences(str, lettre) {
+      return str.split(lettre).length - 1;
+    }
+
+    function executer() {
+      const texte = document.getElementById('chaine').value;
+      const op = document.getElementById('operation').value;
+      const p1 = document.getElementById('param1').value;
+      const p2 = document.getElementById('param2').value;
+      let res = "";
+
+      switch (op) {
+        case "upper":
+          res = texte.toUpperCase();
+          break;
+        case "lower":
+          res = texte.toLowerCase();
+          break;
+        case "trim":
+          res = texte.trim();
+          break;
+        case "reverse":
+          res = inverser(texte);
+          break;
+        case "split":
+          res = texte.split(p1 || ",").map(e => e.trim());
+          break;
+        case "replace":
+          res = texte.replace(p1, p2);
+          break;
+        case "count":
+          res = `Occurrences de "${p1}" : ${compterOccurrences(texte, p1)}`;
+          break;
+        default:
+          res = "Opération inconnue.";
+      }
+
+      document.getElementById('resultat').textContent = "Résultat : " + JSON.stringify(res, null, 2);
+    }
+  </script>
+</body>
+</html>

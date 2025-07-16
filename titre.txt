@@ -1,0 +1,13 @@
+code javasrcipt
+    ouvrir un fichier et le lire en txt
+    générer des liens de téléchargement dans un html
+code javasrcipt
+    activef les liens html periodiquement
+    controler la plage de fichier à télécharger
+    définir le fichier de départ
+    
+    
+Note :
+
+leader1 : lecture du fichier et traitement (complet?)
+leader2 : gestionnnaire des téléchargements 

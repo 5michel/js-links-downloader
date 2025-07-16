@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/leader1.css">
+    <title>CoCo</title>
+</head>
+<body>
+    <div class="overAll">
+        <section class="links-manager"> <!--Gauche-->
+            <div class="banner-title">Téléchargement Automatisé</div>
+            <div>
+                <label for="fichier">*</label>
+                <input type="file" id="fichier" />
+            </div>
+            <div class="download-div">
+                <input type="radio" id="d-type-all" name="d-type" value="all" required />
+                <label for="d-type-all">Tout télécharger</label>
+            </div>
+
+            <div class="download-div">
+                <input type="radio" id="d-type-range" name="d-type" value="range" required />
+                <label for="d-type-range">Télécharger une plage</label>
+                <input type="text" id="dt-range-text" placeholder="ex: 5-15" />
+            </div>
+
+            <div class="download-div">
+                <input type="radio" id="d-type-list" name="d-type" value="list" required />
+                <label for="d-type-list">Télécharger certains</label>
+                <input type="text" id="dt-list-text" placeholder="ex: 1,3,7,20" />
+            </div>
+
+            <div class="set-timer">
+                <label for="spaced-timer">Intervalle (ms)</label>
+                <input type="number" id="spaced-timer" value="1000" min="100" />
+            </div>
+
+            <div class="download-button">
+                <button id="start-download">Télécharger</button>
+            </div>
+        </section>
+
+        <section class="links-view" id="linksView">
+            <div class="banner-title">Lien récupéré -- </div>
+
+        </section>
+
+    </div>
+    <script src="../script/leader1.js"></script>
+</body>
+</html>

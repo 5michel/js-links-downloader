@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoCo</title>
+</head>
+<body>
+    <label for="fichier">jo</label>
+    <input type="file" id="fichier" />
+    <pre id="contenu"></pre>
+    <script>
+        document.getElementById('fichier').addEventListener('change', function(event)
+        {
+            const fichier = event.target.files[0];
+            if (!fichier) return;
+            const lecteur = new FileReader();
+            lecteur.onload = function(e) {
+                let myData = e.target.result;
+                //document.getElementById('contenu').textContent = e.target.result;
+                let listA = myData.split('\n');
+                let titre_mhw = listA[0].split('%%%-%%%')[0];
+                let desc_mhw = listA[0].split('%%%-%%%')[1];
+                //let listB = listA.slice(0,listA.length)
+                let listLinks = [];
+                for(let i=1; i<listA.length; i++){
+                    listLinks[i-1]= listA[i].split('%%%-%%%')[1];
+                    let aLink = document.createElement('a');
+                    aLink.href = listLinks[i-1];
+                    aLink.innerHTML = "Document "+ i ;
+                    aLink.download ;
+                    document.body.appendChild(aLink);
+                }
+                console.log(listLinks);
+
+
+            };
+            lecteur.readAsText(fichier);
+            
+        });
+
+    </script>
+    <script src="myScript.js"></script>
+</body>
+</html>

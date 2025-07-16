@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+</head>
+<body>
+    <section class="links-manager">
+        <div class="banner-title"></div>
+        <div class="download-div">
+            <label for="d-type-all">Dowload all</label>
+            <input type="radio" id="d-type-all" name="d-type" value="all" required>
+            <button type="submit">Download All</button>
+        </div>
+        <div class="download-div">
+            <label for="d-type-range">Download in range</label>
+            <input type="radio" id="d-type-range" name="d-type" value="range" required>
+            <label for="dt-range-text">&gt;</label>
+            <input type="text" id="dt-range-text">
+        </div>
+        <div class="download-div">
+            <label for="d-type-list">Download each of</label>
+            <input type="radio" id="d-type-list" name="d-type" value="list" required>
+            <label for="dt-list-text">&gt;</label>
+            <input type="text" id="dt-list-text">
+        </div>
+        <div class="set-timer">
+            <label for="spaced-timer">Space of</label>
+            <input type="number" id="spaced-timer" value="10" required>
+        </div>
+        <div class="download-button">
+            <button type="submit">Download</button>
+        </div>
+    </section>
+    <section class="links-view">
+        <div class="center-div">
+            <div class="div-links" id="d-link1"><a href="#" class="just-links" id="link1" download="#"></a></div>
+            <div class="div-links" id="d-link2"><a href="#" class="just-links" id="link2" download="#"></a></div>
+            <div class="div-links" id="d-link3"><a href="#" class="just-links" id="link3" download="#"></a></div>
+            <div class="div-links" id="d-link4"><a href="#" class="just-links" id="link4" download="#"></a></div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Download Manager</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .links-manager {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .banner-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #0078d7;
+    }
+
+    .download-div,
+    .set-timer,
+    .download-button {
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+    .download-div.active,
+    .set-timer.active {
+      opacity: 1;
+    }
+
+    label {
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    input[type="radio"] {
+      margin-left: 1rem;
+    }
+
+    button {
+      background: #0078d7;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    .links-view {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .div-links {
+      margin: 0.5rem;
+      display: inline-block;
+    }
+
+    .just-links {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #e0e0e0;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .just-links.highlighted {
+      background: #d0ebff;
+      border-color: #339af0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <section class="links-manager">
+    <div class="banner-title">Téléchargement Automatisé</div>
+
+    <div class="download-div" id="div-all">
+      <input type="radio" id="d-type-all" name="d-type" value="all" required />
+      <label for="d-type-all">Tout télécharger</label>
+    </div>
+
+    <div class="download-div" id="div-range">
+      <input type="radio" id="d-type-range" name="d-type" value="range" required />
+      <label for="d-type-range">Télécharger une plage</label>
+      <input type="text" id="dt-range-text" placeholder="ex: 5-15" />
+    </div>
+
+    <div class="download-div" id="div-list">
+      <input type="radio" id="d-type-list" name="d-type" value="list" required />
+      <label for="d-type-list">Télécharger certains</label>
+      <input type="text" id="dt-list-text" placeholder="ex: 1,3,7,20" />
+    </div>
+
+    <div class="set-timer active">
+      <label for="spaced-timer">Intervalle (ms)</label>
+      <input type="number" id="spaced-timer" value="1000" min="100" />
+    </div>
+
+    <div class="download-button">
+      <button id="start-download">Télécharger</button>
+    </div>
+  </section>
+
+  <section class="links-view">
+    <div class="center-div">
+      <!-- Exemple de 10 liens -->
+      <div class="div-links"><a href="fichiers/fichier1.zip" class="just-links" download>Fichier 1</a></div>
+      <div class="div-links"><a href="fichiers/fichier2.zip" class="just-links" download>Fichier 2</a></div>
+      <div class="div-links"><a href="fichiers/fichier3.zip" class="just-links" download>Fichier 3</a></div>
+      <div class="div-links"><a href="fichiers/fichier4.zip" class="just-links" download>Fichier 4</a></div>
+      <div class="div-links"><a href="fichiers/fichier5.zip" class="just-links" download>Fichier 5</a></div>
+      <div class="div-links"><a href="fichiers/fichier6.zip" class="just-links" download>Fichier 6</a></div>
+      <div class="div-links"><a href="fichiers/fichier7.zip" class="just-links" download>Fichier 7</a></div>
+      <div class="div-links"><a href="fichiers/fichier8.zip" class="just-links" download>Fichier 8</a></div>
+      <div class="div-links"><a href="fichiers/fichier9.zip" class="just-links" download>Fichier 9</a></div>
+      <div class="div-links"><a href="fichiers/fichier10.zip" class="just-links" download>Fichier 10</a></div>
+    </div>
+  </section>
+
+  <script>
+    const allLinks = Array.from(document.querySelectorAll('.just-links'));
+
+    function updateActiveOption() {
+      const selected = document.querySelector('input[name="d-type"]:checked')?.value;
+      document.querySelectorAll('.download-div').forEach(div => {
+        div.classList.remove('active');
+      });
+      if (selected === 'all') document.getElementById('div-all').classList.add('active');
+      if (selected === 'range') document.getElementById('div-range').classList.add('active');
+      if (selected === 'list') document.getElementById('div-list').classList.add('active');
+    }
+
+    document.querySelectorAll('input[name="d-type"]').forEach(radio => {
+      radio.addEventListener('change', updateActiveOption);
+    });
+
+    document.getElementById('start-download').addEventListener('click', () => {
+      const type = document.querySelector('input[name="d-type"]:checked')?.value;
+      const rangeText = document.getElementById('dt-range-text').value.trim();
+      const listText = document.getElementById('dt-list-text').value.trim();
+      const delay = parseInt(document.getElementById('spaced-timer').value) || 1000;
+
+      let selectedLinks = [];
+
+      if (type === 'all') {
+        selectedLinks = allLinks;
+      } else if (type === 'range') {
+        const [start, end] = rangeText.split('-').map(n => parseInt(n));
+        if (!isNaN(start) && !isNaN(end) && start <= end) {
+          selectedLinks = allLinks.slice(start - 1, end);
+        }
+      } else if (type === 'list') {
+        const indices = listText.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+        selectedLinks = indices.map(i => allLinks[i - 1]).filter(Boolean);
+      }
+
+      // Nettoyage des anciennes surbrillances
+      allLinks.forEach(link => link.classList.remove('highlighted'));
+
+      if (selectedLinks.length === 0) {
+        alert("Aucun lien valide sélectionné.");
+        return;
+      }
+
+      // Mise en surbrillance des liens sélectionnés
+      selectedLinks.forEach(link => link.classList.add('highlighted'));
+
+      // Téléchargement en chaîne
+      selectedLinks.forEach((link, i) => {
+        setTimeout(() => {
+          link.click();
+        }, i * delay);
+      });
+    });
+
+    // Initialiser l'état visuel
+    updateActiveOption();
+  </script>
+</body>
+</html>

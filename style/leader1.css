@@ -1,0 +1,94 @@
+body
+{
+    margin: 0px;
+}
+
+.links-view>div
+{
+    border: 1px rgb(236, 97, 220) solid;
+    min-width: 90%;
+    min-height: 3%;
+}
+.overAll
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    border: 1px red solid;
+}
+section
+{
+    border: 1px lightblue solid;
+    padding: 1%;
+    min-width: 20%;
+}
+.banner-title
+{
+    margin-bottom: 2%;
+}
+.links-view
+{
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    padding-bottom: 8%;
+}
+.center-div
+{
+    margin-block: 0.5%;
+    height: 6%;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.links-manager
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.links-manager div
+{
+    margin-bottom: 20px;
+}
+
+input[type=text]:required
+{
+    border-color: blueviolet;
+}
+input[type=text]:valid
+{
+    border-color: greenyellow;
+}
+input[type=text]:invalid
+{
+    border-color: brown;
+}
+input[type=text]:optional
+{
+    border-color: gray;
+}
+
+div:has(>.selected-links)
+{
+    background-color: rgb(249, 211, 250);
+}
+
+.mw-links
+{
+    margin-left: 2%;
+}
+
+.center-div:hover
+{
+    background-color: rgb(249, 192, 251);
+}
+
+div:has(>.selected-download-links)
+{
+    background-color: rgb(99, 193, 255);
+}

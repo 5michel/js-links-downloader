@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/leader1.css">
+    <title>CoCo-2</title>
+</head>
+<body>
+    <div class="overAll">
+        <section class="links-manager"> <!--Gauche-->
+            <form >
+                <div class="banner-title">Téléchargement Automatisé</div>
+                <div>
+                    <label for="selected-file">*</label>
+                    <input type="file" id="selected-file" />
+                </div>
+                <div class="download-div">
+                    <input type="radio" id="download-all-radio" name="download-type-radio" value="all" checked/>
+                    <label for="download-all-radio">Tout télécharger</label>
+                </div>
+
+                <div class="download-div">
+                    <input type="radio" id="download-range-radio" name="download-type-radio" value="range" />
+                    <label for="download-range-radio">Télécharger une plage</label>
+                    <input type="text" id="download-range-text" placeholder="ex: 5-15" pattern="\s*[0-9]*\s*-\s*[0-9]*\s*"/>
+                </div>
+
+                <div class="download-div">
+                    <input type="radio" id="download-list-radio" name="download-type-radio" value="list" />
+                    <label for="download-list-radio">Télécharger certains</label>
+                    <input type="text" id="download-list-text" placeholder="ex: 1,3,7,20" pattern="[0*[1-9][0-9]*\s*,*\s*]*"/>
+                </div>
+
+                <div class="set-timer">
+                    <label for="spaced-timer">Intervalle (secondes)</label>
+                    <input type="number" id="spaced-timer" value="10" min="0" />
+                </div>
+
+                <div class="download-button">
+                    <button id="start-download" type="submit" >Télécharger</button>
+                    
+                </div>
+            </form>
+        </section>
+
+        <section class="links-view" id="linksView">
+            <div class="banner-title">Lien récupéré -- </div>
+            
+            <div class="center-div" id="div-link-1">
+                <a class="mw-links" href="" download="../assets/Hello.pdf" >Document 1</a>
+            </div>
+            <div class="center-div" id="div-link-2"><a class="mw-links" href="" download="../assets/Hello.pdf" >Document 2</a></div>
+            <div class="center-div" id="div-link-3"><a class="mw-links" href="" download="../assets/Hello.pdf">Document 3</a></div>
+            <div class="center-div" id="div-link-4"><a class="mw-links" href="" download="">Document 4</a></div>
+            <div class="center-div" id="div-link-5"><a class="mw-links" href="" download="">Document 5</a></div>
+            <div class="center-div" id="div-link-6"><a class="mw-links" href="" download="">Document 6</a></div>
+            <div class="center-div" id="div-link-7"><a class="mw-links" href="" download="">Document 7</a></div>
+            <div class="center-div" id="div-link-8"><a class="mw-links" href="" download="">Document 8</a></div>
+            <div class="center-div" id="div-link-9"><a class="mw-links" href="" download="">Document 9</a></div>
+            <div class="center-div" id="div-link-10"><a class="mw-links" href="" download="">Document 10</a></div>
+        </section>
+
+    </div>
+    <script src="../script/leader1.js" defer></script>
+</body>
+</html>
