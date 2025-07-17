@@ -8,7 +8,12 @@ download = null
 // RADIO BUTTON SELECTOR
 let downloadOptions = document.querySelectorAll("input[name='download-type-radio']");
 // ALL DOWNLOAD LINKS
-let allLinks = Array.from(document.getElementsByClassName("mw-links"));
+function getAllLinks()
+  {
+    return Array.from(document.getElementsByClassName("mw-links"));
+  }
+let allLinks = getAllLinks();
+let divLinks = Array.from(document.querySelectorAll(".center-div"));
 // DEFAULT LINKS SELECTION
 // SELECTED DOWNLOAD LINKS
 let selectedLinks = [];
@@ -43,6 +48,7 @@ document.getElementById('selected-file').addEventListener('change', function(eve
 
             let aLink = document.createElement('a');
             aLink.classList.add("mw-links");
+            //aLink.classList.add("selected-links-div");
             aLink.href = listLinks[i-1];
             aLink.innerHTML = "Document "+ i ;
             aLink.setAttribute('download','') ;
@@ -57,9 +63,11 @@ document.getElementById('selected-file').addEventListener('change', function(eve
             document.getElementById("linksView").appendChild(divLink);
             //document.getElementById("div-link-"+i).appendChild(aLink)
           }
-        console.log(listLinks);
+        //console.log(listLinks);
     };
     lecteur.readAsText(selectedFile);
+    //allLinks = getAllLinks();
+    //verifyAtStart();
 });
 /*
   "Gestion du choix client" <select option>
@@ -109,12 +117,20 @@ function restoreLinksView()
       {
         thisLink.classList.remove('selected-links');
       });
+    divLinks.forEach(thisDiv =>
+      {
+        thisDiv.classList.remove('selected-links-div');
+      });
   }
 function setAllLinksView()
   {
     allLinks.map(thisLink =>
       {
         thisLink.classList.add('selected-links');
+      });
+    divLinks.forEach(thisDiv =>
+      {
+        thisDiv.classList.add('selected-links-div');
       });
   }
 function selectlinksByRangeOption()
@@ -132,6 +148,7 @@ function selectlinksByRangeOption()
             try
               {
                 allLinks[i-1].classList.add('selected-links');
+                divLinks[i-1].classList.add('selected-links-div');
               }
             catch
               {
@@ -149,6 +166,7 @@ function selectlinksByListOption()
         try
           {
             allLinks[v-1].classList.add('selected-links');
+            divLinks[v-1].classList.add('selected-links-div');
           }
         catch
           {
@@ -165,25 +183,29 @@ listTextInput.addEventListener("input", () =>
     selectlinksByListOption();
     //console.log(values);
   })
+
 /*
   "Réaction au chargement de la page"
 */
-if(downloadOptions[0].checked)
+function verifyAtStart()
   {
-    setAllLinksView();
+    if(downloadOptions[0].checked)
+      {
+        setAllLinksView();
+      }
+    if(downloadOptions[1].checked)
+      {
+        selectlinksByRangeOption();
+      }
+    if(downloadOptions[2].checked)
+      {
+        selectlinksByListOption();
+      }
   }
-if(downloadOptions[1].checked)
-  {
-    selectlinksByRangeOption();
-  }
-if(downloadOptions[2].checked)
-  {
-    selectlinksByListOption();
-  }
+verifyAtStart();
 /*
   "Télécharger les fichiers..." <submit>
 */
-//document.getElementById("start-download").addEventListener("click",() =>
 document.querySelector('form').addEventListener("submit",(event) =>
   {
     //

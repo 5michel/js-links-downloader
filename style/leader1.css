@@ -73,7 +73,7 @@ input[type=text]:optional
     border-color: gray;
 }
 
-div:has(>.selected-links)
+.selected-links-div
 {
     background-color: rgb(249, 211, 250);
 }
