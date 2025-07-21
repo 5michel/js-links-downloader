@@ -14,6 +14,11 @@ function getAllLinks()
   }
 let allLinks = getAllLinks();
 let divLinks = Array.from(document.querySelectorAll(".center-div"));
+function resetLinks()
+  {
+    allLinks = getAllLinks();
+    divLinks = Array.from(document.querySelectorAll(".center-div"));
+  }
 // DEFAULT LINKS SELECTION
 // SELECTED DOWNLOAD LINKS
 let selectedLinks = [];
@@ -23,8 +28,9 @@ let selectedLinks = [];
 let textInput = [rangeTextInput, listTextInput];
 // (CACHE) RADIO TEXT INPUT
 let textInputCache = ['','']
-
-
+// TEST VARIABLE
+//  let iA = 0;
+//  console.log(`>${iA += 1}`);
 /*
   "Charger le fichier..." <select file>
 */
@@ -63,11 +69,12 @@ document.getElementById('selected-file').addEventListener('change', function(eve
             document.getElementById("linksView").appendChild(divLink);
             //document.getElementById("div-link-"+i).appendChild(aLink)
           }
-        //console.log(listLinks);
     };
     lecteur.readAsText(selectedFile);
-    //allLinks = getAllLinks();
-    //verifyAtStart();
+    
+    resetLinks(); // .???
+    verifyAtStart();
+    //console.log("¤");
 });
 /*
   "Gestion du choix client" <select option>
@@ -83,6 +90,7 @@ function restoreInput(num)
   }
 function gesOption(num)
   {
+    resetLinks();
     downloadOptions[num+1].addEventListener("change", () =>
       {
         restoreLinksView();
@@ -99,6 +107,7 @@ function gesOption(num)
   }
 downloadOptions[0].addEventListener("change", () =>
   {
+    resetLinks();
     textInput[0].required.false;
     storeInput(0);
     textInput[1].required.false;
